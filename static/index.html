@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="基于你自己的财报资料，检索、提问与查看回答来源。">
+  <title>澄明 · 财报研究助手</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23152c36'/%3E%3Cpath d='M8 23V16M16 23V8M24 23V12' stroke='%238ce1c6' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/app.css">
+  <script defer src="/static/app.js"></script>
+</head>
+<body>
+<svg class="svg-defs" aria-hidden="true"><defs>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M5 19V12m7 7V5m7 14V9"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 1-8 8H4l1.5-4A8 8 0 1 1 20 11Z"/><path d="M8 10h8m-8 4h5"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8m-8 4h5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4Z"/></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="m10 13 4-4m-7 6-2 2a4 4 0 0 0 6 6l4-4a4 4 0 0 0 0-6M14 11a4 4 0 0 1 0-6l4-4a4 4 0 0 1 6 6l-2 2" transform="translate(-2 -1)"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M15 8V3H3v12h5"/></symbol>
+</defs></svg>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="澄明首页"><span class="brand-mark"><svg><use href="#i-chart"/></svg></span><span><strong>澄明<span class="brand-dot">.</span></strong><small>FINANCE INTELLIGENCE</small></span></a>
+    <button id="newChat" class="new-chat"><svg><use href="#i-plus"/></svg>新建对话<span>↗</span></button>
+    <div class="nav-label">工作空间 <span>WORKSPACE</span></div>
+    <div class="nav-item active"><svg><use href="#i-chat"/></svg><span>财报问答</span><span class="active-dot"></span></div>
+    <div class="library-header"><span>我的财报</span><span id="fileCount" class="count">—</span></div>
+    <div id="fileList" class="file-list"><p class="sidebar-muted">正在读取财报列表…</p></div>
+    <div class="sidebar-bottom">
+      <div class="knowledge-card"><div class="knowledge-title"><svg><use href="#i-database"/></svg><span>财报知识库</span><span id="dbDot" class="status-dot"></span></div><p id="dbMessage">初始化后即可开始提问</p><div class="knowledge-stats"><span>已索引片段</span><strong id="chunkCount">—</strong></div><button id="initialize">初始化知识库<svg><use href="#i-arrow"/></svg></button></div>
+      <div class="local-note"><span class="tiny-dot"></span>本地工作空间<span>LOCAL</span></div>
+    </div>
+  </aside>
+
+  <main class="workspace">
+    <header class="topbar"><div class="breadcrumbs">工作台<svg><use href="#i-chevron"/></svg><strong>财报问答</strong></div><div class="topbar-right"><span id="connection" class="connection"><span class="status-dot"></span><span id="connectionText">准备中</span></span><button id="toggleSources" class="icon-button mobile-source" title="查看资料来源" aria-label="查看资料来源" aria-expanded="false"><svg><use href="#i-link"/></svg></button><span class="avatar" title="本地用户">研</span></div></header>
+    <section class="conversation" id="conversation" aria-label="财报问答">
+      <div id="welcome" class="welcome">
+        <div class="welcome-eyebrow"><span></span>你的专属财报研究工作台</div>
+        <h1>数据有据，<br>洞察<span>有源。</span></h1>
+        <p class="welcome-description">让复杂财报，成为清晰答案。<br>从一个问题开始，发现数字背后的业务逻辑。</p>
+        <div class="research-banner"><div class="banner-icon"><svg><use href="#i-file"/></svg></div><div><span class="banner-kicker">当前研究资料</span><strong id="activeReport">正在读取你的财报…</strong><span class="banner-sub">基于原文检索 · 回答附参考片段</span></div><span class="report-badge">PDF</span></div>
+        <div class="suggestions-heading"><span>不妨从这里开始</span><span>QUICK START</span></div>
+        <div class="suggestions">
+          <button class="suggestion" data-question="2019年一季度归属于上市公司股东的净利润是多少？"><span class="suggestion-number">01</span><strong>关键财务指标</strong><p>2019 年一季度归母净利润是多少？</p><svg><use href="#i-arrow"/></svg></button>
+          <button class="suggestion" data-question="2019年度公司的营业收入与上一年相比有何变化？"><span class="suggestion-number">02</span><strong>经营表现分析</strong><p>全年营业收入与上一年相比有何变化？</p><svg><use href="#i-arrow"/></svg></button>
+          <button class="suggestion" data-question="年报披露了哪些主要经营风险？"><span class="suggestion-number">03</span><strong>经营风险洞察</strong><p>年报披露了哪些主要经营风险？</p><svg><use href="#i-arrow"/></svg></button>
+        </div>
+        <div class="welcome-foot"><svg><use href="#i-spark"/></svg>每一次回答，都可以回到原文。</div>
+      </div>
+      <div id="messages" class="messages" aria-live="polite"></div>
+    </section>
+    <div class="composer-area"><div id="notice" class="notice" role="status" hidden></div><form id="questionForm" class="composer"><label for="question" class="sr-only">输入财报问题</label><textarea id="question" rows="1" maxlength="2000" placeholder="向你的财报提问，例如：公司本年度的盈利情况如何？"></textarea><div class="composer-bottom"><span><svg><use href="#i-spark"/></svg>基于财报资料回答</span><div><span class="keyboard-hint">Enter 发送 · Shift + Enter 换行</span><button id="send" type="submit" title="发送问题" aria-label="发送问题"><svg><use href="#i-arrow"/></svg></button></div></div></form><div class="composer-footnote"><span>模型回答可能存在偏差，请结合原始财报核实。</span><span id="modelName">Qwen Turbo</span></div></div>
+  </main>
+
+  <aside id="sourcePanel" class="source-panel" aria-label="资料来源"><div class="source-header"><div><svg><use href="#i-link"/></svg><strong>资料来源</strong></div><span id="sourceCount">00</span></div><p class="source-intro">透明的分析，始于可追溯的依据。</p><div id="sources" class="sources"><div class="source-empty"><div class="source-art" aria-hidden="true"><div class="art-page page-back"></div><div class="art-page page-front"><svg><use href="#i-chart"/></svg><i></i><i></i><i></i></div><span class="art-check"><svg><use href="#i-check"/></svg></span></div><h2>答案背后的依据</h2><p>开始提问后，相关财报片段<br>将在这里呈现。</p><span class="empty-tag">让每一个结论有迹可循</span></div></div><div class="source-footer"><svg><use href="#i-file"/></svg><div><strong>忠于资料，保留边界</strong><p>当资料不足时，助手会说明<br>无法根据现有信息回答。</p></div></div></aside>
+</div>
+</body>
+</html>

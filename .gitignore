@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# 虚拟环境
+.venv/
+.venv-web/
+venv/
+
+# 密钥与本地配置
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# 本地数据：原始 PDF、MinerU 完整输出、向量库
+my_pdfs/*
+!my_pdfs/.gitkeep
+processed/*
+!processed/.gitkeep
+my_chroma_db/
+chroma_db/
+
+# 备份文件
+*.before-*
+web-backup-*/
+
+# 各代理本地安装的 Skill 副本（源文件在 skills/）
+.claude/skills/

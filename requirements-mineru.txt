@@ -1,0 +1,6 @@
+# 可选：解析新的 PDF 财报时才需要（MinerU + PyTorch，体积较大）
+# 已提供解析结果（processed/ 或 pdf_processed/）时无需安装。
+-r requirements.txt
+mineru[core]==2.7.5
+torch==2.6.0
+torchvision==0.21.0
