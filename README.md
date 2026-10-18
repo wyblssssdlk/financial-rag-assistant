@@ -1,4 +1,4 @@
-# 澄明 · 财报研究助手（Financial RAG Assistant）
+# 财报研究助手（Financial RAG Assistant）
 
 基于 **MinerU + Chroma + 通义千问（DashScope）** 的上市公司财报问答助手。将年报 PDF 解析为文字与表格，建立向量知识库，通过「向量 + BM25」混合检索找到证据，再由大模型严格依据证据作答，并给出引用来源。
 
@@ -149,3 +149,12 @@ python -m unittest discover -s tests
 - Windows 下 Chroma 的 HNSW 索引无法读取含中文的路径；网页端会自动把向量库迁移到英文目录（原库保留）。
 - 回答来自检索与模型生成，可能存在偏差，请以原始财报为准；“检索距离”不是可信度。
 - 本项目仅用于学习与研究，不构成任何投资建议。
+
+## 效果展示
+**网页问答**：输入问题，回答附带年报原文来源
+![alt text](docs/images/image-4.png)
+![alt text](docs/images/image-1.png)
+
+
+**作为 AI 代理的 Skill 使用**
+![alt text](docs/images/image-3.png)
